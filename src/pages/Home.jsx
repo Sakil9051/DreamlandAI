@@ -52,7 +52,7 @@ const Home = () => {
   const handleSearchChange = (e) => {
     clearTimeout(searchTimeout);
     setSearchText(e.target.value);
-
+    let text=e.target.value;
     setSearchTimeout(
       setTimeout(() => {
         let searchResult
