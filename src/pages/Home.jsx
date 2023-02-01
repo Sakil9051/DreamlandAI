@@ -55,10 +55,19 @@ const Home = () => {
 
     setSearchTimeout(
       setTimeout(() => {
-        const searchResult = allPosts.filter((item) => item.name.toLowerCase().includes(searchText.toLowerCase()) || item.prompt.toLowerCase().includes(searchText.toLowerCase()));
-        setSearchedResults(searchResult);
+        let searchResult
+        searchResult  = allPosts.filter((item) => item.prompt.toLowerCase()===text.toLowerCase());
+        
+        if (searchResult.length>0){
+          setSearchedResults(searchResult)
+          console.log(searchResult)
+        }else{
+          searchResult  = allPosts.filter((item) => item.name.toLowerCase()===text.toLowerCase());
+          setSearchedResults(searchResult);
+        }
+        
       }, 500),
-    );
+    )
   };
 
   return (
