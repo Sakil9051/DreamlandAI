@@ -3,6 +3,7 @@ import {  useNavigate } from 'react-router-dom';
 import { preview } from '../assets';
 import {getRandomPrompt} from "../utils";
 import { FormField,Loader } from '../compotents';
+
 const CreatePost = () => {
   const navigate=useNavigate();
   const[form,setForm]=useState({
@@ -19,6 +20,7 @@ const CreatePost = () => {
       setLoading(true);
 
       try{
+        
         const response= await fetch("https://dreamlandai-backend.onrender.com/api/v1/post",{
           method: "POST",
           headers: {
@@ -44,16 +46,31 @@ const CreatePost = () => {
     setForm({...form,[name]:value});
   }
 
-  const hanSurpriseMe=()=>{
-    const randomPrompt=getRandomPrompt(form.prompt);
+  const hanSurpriseMe=async()=>{
+    const randomPrompt=await getRandomPrompt(form.prompt);
+    console.log(randomPrompt);
     setForm({...form,prompt:randomPrompt});
     
+  }
+
+  const ChackPrompt=async(prompt)=>{
+    const res= await fetch("http://localhost:8080/prompt",{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({'prompt': prompt})
+    });
+    let res2=await res.json();
+    console.log(res2);
   }
 
   const generateImage=async()=>{
     if(form.prompt){
       try{
         setGeneratingImg(true);
+     
+     await ChackPrompt(form.prompt);
         const response=await fetch("https://dreamlandai-backend.onrender.com/api/v1/Dreamland",{
           method:"POST",
           headers:{
