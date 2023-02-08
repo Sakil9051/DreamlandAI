@@ -54,7 +54,7 @@ const CreatePost = () => {
   }
 
   const ChackPrompt=async(prompt)=>{
-    const res= await fetch("http://localhost:8080/prompt",{
+    const res= await fetch("https://dreamlandai-backend.onrender.com/prompt",{
       method: "POST",
       headers: {
         "Content-Type": "application/json"
