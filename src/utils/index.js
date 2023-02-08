@@ -1,7 +1,7 @@
 import FileSaver from 'file-saver';
 
 export const getRandomPrompt=async(prompt) =>{
-  let  randomPromp =await fetch("http://localhost:8080/prompt");
+  let  randomPromp =await fetch("https://dreamlandai-backend.onrender.com/prompt");
   let res=await randomPromp.json();
   const randomPrompt =res.prompt;
   prompt=await prompt;
